@@ -11,14 +11,12 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
-    first_name = Column(String(50)) # modificado
-    last_name = Column(String(50))
-    nickname = Column(String(20),unique=True) # modificado
+    first_name = Column(String(50),nullable=False) 
+    last_name = Column(String(50),nullable=False)
+    nickname = Column(String(20),unique=True) 
     email = Column(String(120), nullable=False, unique= True)
     password = Column(String(20), nullable=False)
-    #gender = Column(String(10),nullable=False)
-    #dob = Column(db.DateTime)
-    #telephone = Column(Integer)
+
 
 
 class Post(Base):
@@ -58,5 +56,5 @@ class Likes(Base):
     def to_dict(self):
         return {}
 
-## Draw from SQLAlchemy base
+
 render_er(Base, 'diagram2.png')
