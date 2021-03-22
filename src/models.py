@@ -27,6 +27,7 @@ class Post(Base):
     comments = Column(String(1000), nullable=False)
     #publisher_ID = Column(Integer, ForeignKey('user.id')) REVISAR PORQUE NO FUNCIONA
     image = Column(String(400), nullable=False)
+    user = relationship(User)
     
 
 class Comments(Base):
@@ -36,6 +37,8 @@ class Comments(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
     post_id = Column(Integer, ForeignKey('post.id'))
     text = Column(String(4000), nullable=False)
+    user = relationship(User)
+    post = relationship(Post)
 
 
 class Followers(Base):
@@ -44,6 +47,7 @@ class Followers(Base):
     id = Column(Integer, primary_key=True)
     user_from = Column(Integer, ForeignKey('user.id'))
     user_to = Column(Integer, ForeignKey('user.id'))
+    user = relationship(User)
 
 class Likes(Base):
     __tablename__ = 'likes'
@@ -51,10 +55,12 @@ class Likes(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     post_id = Column(Integer, ForeignKey('post.id'))
+    user = relationship(User)
+    post = relationship(Post)
     
 
     def to_dict(self):
         return {}
 
 
-render_er(Base, 'diagram2.png')
+render_er(Base, 'diagram3.png')
